@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+      
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+        stage('sast') {
+            steps {
+                sh '/home/curso/CURSOS/sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dsonar.projectKey=Practica -Dsonar.sources=. -Dsonar.java.libraries=. -Dsonar.java.binaries=. -Dsonar.host.url=http://localhost:9000 -Dsonar.login=1ea1fd7aad6645a068227d7f45f7891878e3c657'
+            }
+        }
+    }
+}
